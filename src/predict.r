@@ -64,4 +64,4 @@ predictions = model$predict(task)
 # Creating dataframe and saving results
 results <- data.frame(ids = ids, prediction = predictions[["response"]])
 colnames(results) <- c(id_feature, "prediction")
-write.csv(predictions_df, PREDICTIONS_FILE, row.names = FALSE)
+write.csv(results, PREDICTIONS_FILE, row.names = FALSE)
