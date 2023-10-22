@@ -80,5 +80,5 @@ RUN R -e "install.packages(c('mlr3', 'mlr3tuning', 'mlr3hyperband', 'mlr3pipelin
 
 USER 1000
 
-# ENTRYPOINT ["/opt/entry_point.sh"]
-ENTRYPOINT [ "/bin/bash" ]
+ENTRYPOINT ["/opt/entry_point.sh"]
+# ENTRYPOINT [ "/bin/bash" ]
