@@ -10,7 +10,7 @@ The following is the directory structure of the project:
   - **`/inputs/`**: This directory contains all the input files for this project, including the `data` and `schema` files. The `data` is further divided into `testing` and `training` subsets.
   - **`/model/artifacts/`**: This directory is used to store the model artifacts, such as trained models and their parameters.
   - **`/outputs/`**: The outputs directory contains sub-directory prediction results.
-- `requirements.txt` This file contains libraries used to implement the model.
+- `requirements.txt`: This file contains libraries used to implement the model. -**`packages/`**: This directory contains the mlr3automl package which is used to build the docker image.
 - **`src/`**: This directory holds the source code for the project. It is further divided into various subdirectories:
   - **`train.r`**: This script is used to train the model. It loads the data, preprocesses it, trains the model, and saves the artifacts in the path `./model_inputs_outputs/model/artifacts/`.
   - **`predict.r`**: This script is used to run batch predictions using the trained model. It loads the artifacts and creates and saves the predictions in a file called `predictions.csv` in the path `./model_inputs_outputs/outputs/predictions/`.
@@ -51,10 +51,10 @@ devtools::install_github('https://github.com/a-hanf/mlr3automl', dependencies = 
    `docker build -t model_img .` <br/>
    Here `model_img` is the name given to the container (you can choose any name).
 3. Note the following before running the container for train or batch prediction:
-   - The train, batch predictions tasks and inference service tasks require a bind mount to be mounted to the path `/opt/model_inputs_outputs/` inside the container. You can use the `-v` flag to specify the bind mount.
+   - The train and batch predictions tasks require a bind mount to be mounted to the path `/opt/model_inputs_outputs/` inside the container. You can use the `-v` flag to specify the bind mount.
    - When you run the train or batch prediction tasks, the container will exit by itself after the task is complete.
    - When you run training task on the container, the container will save the trained model artifacts in the specified path in the bind mount. This persists the artifacts even after the container is stopped or killed.
-   - When you run the batch prediction or inference service tasks, the container will load the trained model artifacts from the same location in the bind mount. If the artifacts are not present, the container will exit with an error.
+   - When you run the batch prediction, the container will load the trained model artifacts from the same location in the bind mount. If the artifacts are not present, the container will exit with an error.
    - Container runs as user 1000. Provide appropriate read-write permissions to user 1000 for the bind mount. Please follow the principle of least privilege when setting permissions. The following permissions are required:
      - Read access to the `inputs` directory in the bind mount. Write or execute access is not required.
      - Read-write access to the `outputs` directory and `model` directories. Execute access is not required.

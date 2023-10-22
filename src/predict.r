@@ -52,11 +52,11 @@ ids <- df[[id_feature]]
 df[[id_feature]] <- NULL
 
 colnames(df) <- paste0("f", 1:ncol(df))
-df[[target_feature]] <- 0
+df[["target_feature"]] <- 0
 
 
 # Define prediction task
-task = TaskRegr$new(id = "reg_task", backend = df, target = target_feature)
+task = TaskRegr$new(id = "reg_task", backend = df, target = "target_feature")
 
 # Load model
 model = readRDS(PREDICTOR_FILE_PATH)

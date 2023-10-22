@@ -56,9 +56,9 @@ df[[target_feature]] <- NULL
 
 colnames(df) <- paste0("f", 1:ncol(df))
 
-df[[target_feature]] <- target
+df[["target_feature"]] <- target
 
-task = TaskRegr$new(id = "reg_task", backend = df, target = target_feature)
+task = TaskRegr$new(id = "reg_task", backend = df, target = "target_feature")
 
 
 # Run automl
