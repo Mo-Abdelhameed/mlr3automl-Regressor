@@ -46,11 +46,14 @@ header_line <- readLines(file_name, n = 1)
 col_names <- unlist(strsplit(header_line, split = ",")) # assuming ',' is the delimiter
 # Read the CSV with the exact column names
 df <- read.csv(file_name, skip = 0, col.names = col_names, check.names=FALSE)
-df[[target_feature]] <- 0
 
 # Remove ids from testing dataframe
 ids <- df[[id_feature]]
 df[[id_feature]] <- NULL
+
+colnames(df) <- paste0("f", 1:ncol(df))
+df[[target_feature]] <- 0
+
 
 # Define prediction task
 task = TaskRegr$new(id = "reg_task", backend = df, target = target_feature)

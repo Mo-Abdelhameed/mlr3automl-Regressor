@@ -50,6 +50,13 @@ col_names <- unlist(strsplit(header_line, split = ",")) # assuming ',' is the de
 df <- read.csv(file.path(TRAIN_DIR, file_name), skip = 0, col.names = col_names, check.names=FALSE)
 
 df[[id_feature]] <- NULL
+target = df[[target_feature]]
+df[[target_feature]] <- NULL
+
+
+colnames(df) <- paste0("f", 1:ncol(df))
+
+df[[target_feature]] <- target
 
 task = TaskRegr$new(id = "reg_task", backend = df, target = target_feature)
 
